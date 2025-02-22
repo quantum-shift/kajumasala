@@ -28,7 +28,7 @@ def gen_transcript(context: dict):
         ],
         store=True
     )
-    context.update('transcript', completion.choices[0].message.content)
+    context['transcript'] = completion.choices[0].message.content
 
 
 if __name__ == "__main__":

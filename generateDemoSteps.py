@@ -22,7 +22,5 @@ def create_steps_prompt(context: dict) -> str:
     if not context.get('user_query'):
         raise RuntimeError("Missing user_query in generateDemoSteps.create_steps_prompt")
     
-    context.update('user_goal', context.get('user_query'))
-    context.update('steps', steps)
-    
-    raise RuntimeError("Error path in generateDemoSteps.create_steps_prompt")
+    context['user_goal'] = context.get('user_query')
+    context['steps'] = steps

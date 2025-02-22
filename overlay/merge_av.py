@@ -37,4 +37,4 @@ def merge_video_audio(context):
     # Write the final video with the new audio
     video.write_videofile(final_video_path, codec="libx264", audio_codec="aac")
 
-    context.update('final_video_path', final_video_path)
+    context['final_video_path'] = final_video_path
