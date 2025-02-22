@@ -121,7 +121,6 @@ async def generateDemoVideo(context):
 	# "height": 1000
     # })
     
-    print("I'm hereHJHHHHHHHHHHHH")
     browser = Browser(config=config)
     contextConfig = BrowserContextConfig(
         browser_window_size={
@@ -131,6 +130,7 @@ async def generateDemoVideo(context):
         maximum_wait_page_load_time=2,
         #cookies_file='11labs_cookies.json'
     )
+    action_list = []
     async with await browser.new_context(config=contextConfig) as browser_context:
         agent = Agent(
             task=task,
@@ -145,6 +145,8 @@ async def generateDemoVideo(context):
         )
 
         result = await agent.run()
+        action_list = agent.action_list
+        print("I'm hereHJHHHHHHHHHHHH")
         print(result)
     
     await browser.close()
@@ -157,7 +159,7 @@ async def generateDemoVideo(context):
     # cv2.destroyAllWindows()  # Ensure all OpenCV windows are closed
 
     context['demo_video_path'] = ""
-    context['action_logs'] = result
+    context['action_logs'] = '\n'.join(map(lambda x: x.current_state.next_goal, action_list))
     return context
 
 if __name__ == "__main__":

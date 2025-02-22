@@ -11,7 +11,7 @@ def process_logs(context):
     action_logs = [line for line in action_logs if "Next goal:" in line]
     action_logs = [line.replace("Next goal:", "").strip() for line in action_logs]
     
-    context.update('action_log_filtered', action_logs)
+    context['action_log_filtered'] = action_logs
 
 if __name__ == "__main__":
     with open("./audio/action_log.txt", "r") as file:

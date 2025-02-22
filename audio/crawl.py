@@ -91,7 +91,10 @@ def crawl(context):
 
     deferred.addCallback(store_results)
     # deferred.addBoth(store_results)
-    reactor.run()
+    try:
+        reactor.run()
+    except Exception as e:
+        reactor.stop()
 
 
     # process = CrawlerProcess()

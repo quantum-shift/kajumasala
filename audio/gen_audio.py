@@ -31,8 +31,8 @@ def gen_audio(context: dict):
     voice_id = "JBFqnCBsd6RMkjVDRZzb"
     voice_settings = {}
     
-    audio_path = gen_audio_internal(request_id, transcript, language, voice_id, voice_settings)
-    context.update('audio_path', audio_path)
+    audio_path = gen_audio_internal(request_id, transcript, voice_id, voice_settings)
+    context['audio_path'] = audio_path
     
 
 if __name__ == "__main__":

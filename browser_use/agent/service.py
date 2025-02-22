@@ -129,6 +129,7 @@ class Agent(Generic[Context]):
 		if page_extraction_llm is None:
 			page_extraction_llm = llm
 
+		self.action_list = []
 		self.settings = AgentSettings(
 			use_vision=use_vision,
 			use_vision_for_planner=use_vision_for_planner,
@@ -326,6 +327,7 @@ class Agent(Generic[Context]):
 				await self._raise_if_stopped_or_paused()
 
 				self._message_manager.add_model_output(model_output)
+				self.action_list.append(model_output)
 			except Exception as e:
 				# model call failed, remove last state message from history
 				self._message_manager._remove_last_state_message()
