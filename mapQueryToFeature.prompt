@@ -1,0 +1,6 @@
+A web application has the following features : 
+{features}
+Please map the following user query into one of the above features.
+Answer with a single feature. Do not elaborate or add punctuation.
+If you do not have high confidence in any feature, answer 'Unknown'.
+User Query : {user_query} 

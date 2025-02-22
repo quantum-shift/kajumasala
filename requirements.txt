@@ -31,3 +31,4 @@ openai
 elevenlabs
 flask
 scrapy
+flask-cors

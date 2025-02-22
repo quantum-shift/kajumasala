@@ -22,14 +22,6 @@ config = BrowserConfig(
     disable_security=True,
     chrome_instance_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 )
-
-def createTempDir(req_id):
-    dir_path = f"./recordings/{req_id}"
-
-    directory = Path(dir_path)
-    directory.mkdir(parents=True, exist_ok=True)
-    return dir_path
-
 # Flag to control the recording thread
 recording = True
 
@@ -41,6 +33,8 @@ def record_screen(request_id):
 
     # Define the codec and create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*"MJPG")  # Codec for .avi file
+    # make the recordings directory
+    Path("./recordings").mkdir(parents=True, exist_ok=True)
     output = cv2.VideoWriter(f"./recordings/{request_id}.avi", fourcc, fps, (3024, 1964))
 
     while recording:
@@ -147,7 +141,6 @@ async def generateDemoVideo(context):
 
         result = await agent.run()
         action_list = agent.action_list
-        print("I'm hereHJHHHHHHHHHHHH")
         print(result)
     
     await browser.close()

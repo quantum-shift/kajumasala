@@ -1,5 +1,3 @@
-# merge_media.py
-
 from moviepy.editor import VideoFileClip, AudioFileClip
 import moviepy.video.fx.all as vfx
 from pathlib import Path
@@ -28,9 +26,15 @@ def merge_video_audio(context):
     video = VideoFileClip(video_path)
     audio = AudioFileClip(audio_path)
 
+    audio_duration = audio.duration
+    video_duration = video.duration
+    speed_factor = video_duration / audio_duration
+    video = video.fx(vfx.speedx, speed_factor)
+
     # Set the audio of the video
     video = video.set_audio(audio)
 
+    Path("./output").mkdir(parents=True, exist_ok=True)
     final_video_path = f"./output/output_video_{context.get('request_id')}.mp4"
     
     # Write the final video with the new audio
