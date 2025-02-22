@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify
 import logging
+from generateDemoSteps import create_steps_prompt
+import uuid
 
 # setup logging
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
-
-# Step function placeholders
-def create_steps_prompt(context):
-    logging.info("Creating steps prompt")
-    pass
 
 def gen_video(context):
     logging.info("Generating video")
@@ -33,8 +30,10 @@ def run():
         user_query = request.json.get('user_query')
         if not user_query:
             return jsonify({'status': 'error', 'message': 'Missing user_query'}), 400
-            
-        context = {'user_query': user_query}
+        
+        request_id = uuid.uuid4()
+
+        context = {'user_query': user_query, 'request_id': request_id}
         logging.info(f"Received user query: {user_query}")
 
         create_steps_prompt(context)

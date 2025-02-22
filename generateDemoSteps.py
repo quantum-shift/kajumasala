@@ -6,32 +6,23 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-config = BrowserConfig(
-    headless=False,
-    disable_security=True,
-    chrome_instance_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-)
+# user_goal = """Demonstrate the Conversational Agent creation platform with an example of a 'Sales Negotiation Coach'.
+# Emphasise on features such as 'Voice Language', 'System Prompt'
+# """
+steps = """1. Open elevenlabs.io website directly
+2. Click 'Go to app'
+3. Click 'Conversational AI' under products section in LHS
+4. On the LHS choose 'Agents' -> Click 'Create an Ai Agent' -> 'Blank template'
+5. Provide name as 'Sales Negotiation Coach' -> 'Create Agent' 
+6. Select 'Agent Language' as 'Dutch' -> Input the 'System prompt' as something related to Negotiation coach.
+7. Finally click 'Test AI Agent' and end.
+"""
 
-
-async def main():
-    browser = Browser(config=config)
-    contextConfig = BrowserContextConfig(
-        browser_window_size={
-            'width': 1600,
-            'height': 1200
-        },
-        save_recording_path="./recordings"
-    )
-    async with await browser.new_context(config=contextConfig) as context:
-        agent = Agent(
-            task="Generate demo steps by exploring the product",
-            llm=ChatOpenAI(model="gpt-4o"),
-            use_vision=True,
-            browser_context=context
-        )
-        result = await agent.run()
-        print(result)
-
-    await browser.close()
-
-asyncio.run(main())
+def create_steps_prompt(context: dict) -> str:
+    if not context.get('user_query'):
+        raise RuntimeError("Missing user_query in generateDemoSteps.create_steps_prompt")
+    
+    context.update('user_goal', context.get('user_query'))
+    context.update('steps', steps)
+    
+    raise RuntimeError("Error path in generateDemoSteps.create_steps_prompt")
