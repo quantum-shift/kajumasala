@@ -1,3 +1,4 @@
+import os
 from langchain_openai import ChatOpenAI
 from browser_use import Agent
 from browser_use import BrowserConfig, Browser, BrowserContextConfig
@@ -32,7 +33,7 @@ def createTempDir(req_id):
 # Flag to control the recording thread
 recording = True
 
-def record_screen():
+def record_screen(request_id):
     global recording
     # Set up parameters for video recording
     # screen_size = pyautogui.size()  # Get the size of the primary monitor
@@ -40,12 +41,12 @@ def record_screen():
 
     # Define the codec and create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*"MJPG")  # Codec for .avi file
-    output = cv2.VideoWriter("screen_record.avi", fourcc, fps, (3024, 1964))
+    output = cv2.VideoWriter(f"./recordings/{request_id}.avi", fourcc, fps, (3024, 1964))
 
     while recording:
-        print("Taking screenshot")
         # Capture the screen
         img = pyautogui.screenshot()
+        print(f"Taking screenshot: {img.size}")
 
         # Convert the image to a numpy array
         frame = np.array(img)
@@ -98,7 +99,7 @@ async def generateDemoVideo(context):
     task = task_template.format(user_goal=user_goal, steps=demo_steps)
 
     # Create and start the recording thread
-    recording_thread = threading.Thread(target=record_screen)
+    recording_thread = threading.Thread(target=record_screen, args=(request_id,))
     recording_thread.start()
 
 
@@ -158,7 +159,7 @@ async def generateDemoVideo(context):
     # out.release()
     # cv2.destroyAllWindows()  # Ensure all OpenCV windows are closed
 
-    context['demo_video_path'] = ""
+    context['video_path'] = f"./recordings/{request_id}.avi"
     context['action_logs'] = '\n'.join(map(lambda x: x.current_state.next_goal, action_list))
     return context
 
