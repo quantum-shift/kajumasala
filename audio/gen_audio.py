@@ -29,7 +29,8 @@ def gen_audio(context: dict):
     
     request_id = context.get('request_id')
     transcript = context.get('transcript')
-    voice_id = "JBFqnCBsd6RMkjVDRZzb"
+    # voice_id = "JBFqnCBsd6RMkjVDRZzb"
+    voice_id = "21m00Tcm4TlvDq8ikWAM"
     voice_settings = {}
     
     audio_path = gen_audio_internal(request_id, transcript, voice_id, voice_settings)
