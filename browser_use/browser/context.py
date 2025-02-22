@@ -207,6 +207,7 @@ class BrowserContext:
 			# This is crucial - it closes the CDP connection
 			if not self.config._force_keep_context_alive:
 				try:
+					print('Closing the session context')
 					await self.session.context.close()
 				except Exception as e:
 					logger.debug(f'Failed to close context: {e}')

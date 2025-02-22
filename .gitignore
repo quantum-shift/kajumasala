@@ -1,3 +1,4 @@
 myenv
 venv
 browser_use/**/*.pyc
+recordings

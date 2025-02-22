@@ -1,26 +1,62 @@
 from langchain_openai import ChatOpenAI
 from browser_use import Agent
-from browser_use import BrowserConfig, Browser
+from browser_use import BrowserConfig, Browser, BrowserContextConfig
 import asyncio
 from dotenv import load_dotenv
+
 load_dotenv()
 
 config = BrowserConfig(
     headless=False,
     disable_security=True,
+    chrome_instance_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 )
-browser = Browser()
 
-browser.new_context()
+# Define your local variables
+user_goal = """Demonstrate the Conversational Agent creation platform with an example of a 'Sales Negotiation Coach'.
+Emphasise on features such as 'Voice Language', 'System Prompt'
+"""
+steps = """1. Open elevenlabs.io website directly
+2. Click 'Go to app'
+3. Click 'Conversational AI' under products section in LHS
+4. On the LHS choose 'Agents' -> Click 'Create an Ai Agent' -> 'Blank template'
+5. Provide name as 'Sales Negotiation Coach' -> 'Create Agent' 
+6. Select 'Agent Language' as 'Dutch' -> Input the 'System prompt' as something related to Negotiation coach.
+7. Finally click 'Test AI Agent' and end.
+"""
+
+user_goal = "Just do google search on Glean"
+
+steps = """1. Open google.com website directly
+2. Search for 'Glean'
+3. Click 'First link'
+4. End the steps
+"""
 
 async def main():
-    agent = Agent(
-        task="Go to google, search for 'next t20 match', click on the first result.",
-        llm=ChatOpenAI(model="gpt-4o"),
-        use_vision=True,
-        browser=Browser(config=config)
+    with open("demoAgent.prompt", "r") as file:
+        prompt_template = file.read()
+    
+    task = prompt_template.format(user_goal=user_goal, steps=steps)
+
+    browser = Browser()
+    contextConfig = BrowserContextConfig(
+        browser_window_size={
+            'width': 1600,
+            'height': 1200
+        },
+        save_recording_path="./recordings"
     )
-    result = await agent.run()
-    print(result)
+    async with await browser.new_context(config=contextConfig) as context:
+        agent = Agent(
+            task=task,
+            llm=ChatOpenAI(model="gpt-4o"),
+            use_vision=True,
+            browser_context=context
+        )
+        result = await agent.run()
+        print(result)
+
+    await browser.close()
 
 asyncio.run(main())
