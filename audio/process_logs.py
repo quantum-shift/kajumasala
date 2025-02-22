@@ -8,10 +8,7 @@ def process_logs(context):
     action_logs = action_logs.split('\n')
     action_logs = [line for line in action_logs if line.strip()]
     
-    # keep only lines with "Next goal:"
     action_logs = [line for line in action_logs if "Next goal:" in line]
-    
-    # remove the "Next goal:" prefix
     action_logs = [line.replace("Next goal:", "").strip() for line in action_logs]
     
     context.update('action_log_filtered', action_logs)
