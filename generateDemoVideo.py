@@ -25,21 +25,13 @@ steps = """1. Open elevenlabs.io website directly
 7. Finally click 'Test AI Agent' and end.
 """
 
-user_goal = "Just do google search on Glean"
-
-steps = """1. Open google.com website directly
-2. Search for 'Glean'
-3. Click 'First link'
-4. End the steps
-"""
-
 async def main():
     with open("demoAgent.prompt", "r") as file:
         prompt_template = file.read()
     
     task = prompt_template.format(user_goal=user_goal, steps=steps)
 
-    browser = Browser()
+    browser = Browser(config=config)
     contextConfig = BrowserContextConfig(
         browser_window_size={
             'width': 1600,
