@@ -1,6 +1,7 @@
 from moviepy.editor import VideoFileClip, AudioFileClip
 import moviepy.video.fx.all as vfx
 from pathlib import Path
+import os
 
 def merge_video_audio(context):
     """
@@ -39,4 +40,6 @@ def merge_video_audio(context):
     # Write the final video with the new audio
     video.write_videofile(final_video_path, codec="libx264", audio_codec="aac")
 
-    context['final_video_path'] = final_video_path
+    realpath_video_path = os.path.realpath(final_video_path)
+
+    context['final_video_path'] = realpath_video_path

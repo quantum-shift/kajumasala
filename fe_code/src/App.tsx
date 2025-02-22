@@ -58,7 +58,7 @@ const sendUserGoal = async (user_goal: string, language: string) => {
   } catch (error) {
       console.error('Error:', error);
       return {
-        final_video_url: '/user/naveenls/abc.mp4'
+        final_video_path: '/user/naveenls/abc.mp4'
       }
   }
 };
@@ -91,7 +91,7 @@ function App() {
     setPageState({
       inUse: true,
       loading: false,
-      pageUrl: response['final_video_url']
+      pageUrl: response['final_video_path']
     })
   }, [query])
 
