@@ -287,6 +287,7 @@ class Agent(Generic[Context]):
 	# @observe(name='agent.step', ignore_output=True, ignore_input=True)
 	@time_execution_async('--step (agent)')
 	async def step(self, step_info: Optional[AgentStepInfo] = None) -> None:
+		step_num = step_info.step_number if step_info else 0
 		"""Execute one step of the task"""
 		logger.info(f'📍 Step {self.state.n_steps}')
 		state = None
@@ -305,12 +306,12 @@ class Agent(Generic[Context]):
 				plan = await self._run_planner()
 				# add plan before last state message
 				self._message_manager.add_plan(plan, position=-1)
-
+			print("COMPLETED INITIAL PLAN", step_num)
 			input_messages = self._message_manager.get_messages()
 
 			try:
 				model_output = await self.get_next_action(input_messages)
-
+				print("GENERATE MODEL OUTPUT", step_num)
 				self.state.n_steps += 1
 
 				if self.register_new_step_callback:
@@ -331,6 +332,7 @@ class Agent(Generic[Context]):
 				raise e
 
 			result: list[ActionResult] = await self.multi_act(model_output.action)
+			print("COMPLETED FIRST ACT", step_num)
 
 			self.state.last_result = result
 
@@ -516,6 +518,7 @@ class Agent(Generic[Context]):
 			# Execute initial actions if provided
 			if self.initial_actions:
 				result = await self.multi_act(self.initial_actions, check_for_new_elements=False)
+				print("COMPLETED INITIAL ACTIONS")
 				self.state.last_result = result
 
 			for step in range(max_steps):

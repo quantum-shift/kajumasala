@@ -150,6 +150,8 @@ class Browser:
 			[
 				self.config.chrome_instance_path,
 				'--remote-debugging-port=9222',
+				'--disable-session-crashed-bubble',
+				'--no-default-browser-check'
 			]
 			+ self.config.extra_chromium_args,
 			stdout=subprocess.DEVNULL,
