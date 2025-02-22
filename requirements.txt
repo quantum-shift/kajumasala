@@ -25,6 +25,7 @@ langchain>=0.3.18
 langchain-aws>=0.2.11
 langchain-fireworks>=0.2.6
 langchain-google-genai==2.0.8
-
 # Overlay
 moviepy>=2.1.2
+openai
+elevenlabs
