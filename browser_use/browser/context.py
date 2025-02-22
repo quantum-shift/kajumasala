@@ -746,7 +746,11 @@ class BrowserContext:
 		page = await self.get_current_page()
 
 		await page.bring_to_front()
-		await page.wait_for_load_state()
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
+		
 
 		screenshot = await page.screenshot(
 			full_page=full_page,

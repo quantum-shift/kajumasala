@@ -1,5 +1,6 @@
 import os
 from elevenlabs.client import ElevenLabs
+from pathlib import Path
 
 client = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 
@@ -12,7 +13,7 @@ def gen_audio_internal(request_id, text, voice_id, voice_settings):
         model_id="eleven_multilingual_v2",
         # voice_settings=voice_settings,
     )
-
+    Path("./audio").mkdir(parents=True, exist_ok=True)
     audio_path = f"./audio/audio_{request_id}.mp3"
     with open(audio_path, "wb") as file:
         for chunk in audio:

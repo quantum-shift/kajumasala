@@ -38,12 +38,14 @@ const initialHistoryItems = [
 
 const sendUserGoal = async (user_goal: string, language: string) => {
   try {
-      const response = await fetch('http://localhost:5001', {
+      const body = JSON.stringify({ 'user_query': user_goal, 'language': language });
+      console.log('Request:', body);
+      const response = await fetch('http://localhost:5001/generate', {
           method: 'POST',  // Use POST for sending data
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ user_goal, language }),  // Payload
+          body: body,  // Payload
       });
 
       if (!response.ok) {
@@ -69,12 +71,13 @@ type PageState = {
 
 function App() {
   const [query, setQuery] = useState<string>()
-  const [language, setLanguage] = useState<string>('english')
+  const [language, setLanguage] = useState<string>('en')
 
   const [historyItems, setHistoryItems] = useState(initialHistoryItems)
   const [pageState, setPageState] = useState<PageState>()
 
   const handleGenerate = useCallback(async () => {
+    console.log("here" + query)
     if (!query) return
 
     setHistoryItems((historyItems) => [...historyItems, { title: query.slice(0, 20) }])
@@ -82,7 +85,9 @@ function App() {
       inUse: true,
       loading: true,
     })
+    console.log("next" + query)
     const response = await sendUserGoal(query, language)
+    console.log("How tf are we here")
     setPageState({
       inUse: true,
       loading: false,
@@ -164,19 +169,19 @@ function App() {
                     selectedKeys: language ? [language] : undefined, 
                     items: [
                     {
-                      key: 'english',
+                      key: 'en',
                       label: 'English'
                     },
                     {
-                      key: 'french',
+                      key: 'fr',
                       label: 'French'
                     },
                     {
-                      key: 'german',
+                      key: 'de',
                       label: 'German'
                     },
                     {
-                      key: 'dutch',
+                      key: 'nl',
                       label: 'Dutch'
                     }
                   ] }} trigger={['click']}>
