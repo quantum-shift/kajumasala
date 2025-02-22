@@ -5,3 +5,6 @@ recordings
 crawler/crawler/__pycache__/
 *.pyc
 crawler/output.json
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
