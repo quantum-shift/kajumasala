@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 from browser_use import Agent
 from browser_use import BrowserConfig, Browser, BrowserContextConfig
+from generateDemoSteps import GenerateDemoSteps
 import asyncio
 from dotenv import load_dotenv
 import os
@@ -13,24 +14,11 @@ config = BrowserConfig(
     chrome_instance_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 )
 
-# Define your local variables
-user_goal = """Demonstrate the Conversational Agent creation platform with an example of a 'Sales Negotiation Coach'.
-Emphasise on features such as 'Voice Language', 'System Prompt'
-"""
-steps = """1. Open elevenlabs.io website directly
-2. Click 'Go to app'
-3. Click 'Conversational AI' under products section in LHS
-4. On the LHS choose 'Agents' -> Click 'Create an Ai Agent' -> 'Blank template'
-5. Provide name as 'Sales Negotiation Coach' -> 'Create Agent' 
-6. Select 'Agent Language' as 'Dutch' -> Input the 'System prompt' as something related to Negotiation coach.
-7. Finally click 'Test AI Agent' and end.
-"""
-
 async def main():
     with open("demoAgent.prompt", "r") as file:
         prompt_template = file.read()
     
-    task = prompt_template.format(user_goal=user_goal, steps=steps)
+    task = prompt_template.format(user_goal=GenerateDemoSteps.get_user_goal, steps=GenerateDemoSteps.get_steps)
 
     browser = Browser(config=config)
     contextConfig = BrowserContextConfig(
