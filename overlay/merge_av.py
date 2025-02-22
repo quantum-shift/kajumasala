@@ -1,6 +1,6 @@
 # merge_media.py
 
-from moviepy import VideoFileClip, AudioFileClip
+from moviepy.editor import VideoFileClip, AudioFileClip
 
 def merge_video_audio(context):
     """
@@ -24,10 +24,6 @@ def merge_video_audio(context):
     # Load video and audio files
     video = VideoFileClip(video_path)
     audio = AudioFileClip(audio_path)
-
-    # Trim the video to match the audio length (optional)
-    audio_duration = audio.duration
-    video = video.subclip(0, audio_duration)
 
     # Set the audio of the video
     video = video.set_audio(audio)
