@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import logging
 from generateDemoSteps import create_steps_prompt
-from audio import gen_audio, gen_transcript
+from audio import gen_audio, gen_transcript, process_logs
 from overlay.merge_av import merge_video_audio
 import uuid
 
@@ -27,6 +27,7 @@ def run():
         logging.info(f"Received user query: {user_query}")
         create_steps_prompt(context)
         gen_video(context)
+        process_logs(context)
         gen_transcript(context)
         gen_audio(context)
         merge_video_audio(context)
