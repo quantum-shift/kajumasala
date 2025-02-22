@@ -1,15 +1,27 @@
 from langchain_openai import ChatOpenAI
 from browser_use import Agent
+from browser_use import BrowserConfig, Browser
 import asyncio
 from dotenv import load_dotenv
 load_dotenv()
 
-OPEN_AI_API = "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"
+OPEN_AI_API = "sk-proj-"
+
+config = BrowserConfig(
+    headless=False,
+    disable_security=True,
+    chrome_instance_path="/Applications/Arc.app/Contents/MacOS/Arc"
+)
+browser = Browser()
+
+browser.new_context()
 
 async def main():
     agent = Agent(
-        task="Go to Reddit, search for 'browser-use', click on the first post and return the first comment.",
+        task="Go to google, search for 'next t20 match', click on the first result.",
         llm=ChatOpenAI(model="gpt-4o", api_key=OPEN_AI_API),
+        use_vision=True,
+        browser=Browser(config=config)
     )
     result = await agent.run()
     print(result)
