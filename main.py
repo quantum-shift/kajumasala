@@ -22,12 +22,13 @@ app = Flask(__name__)
 def run():
     try:
         user_query = request.json.get('user_query')
-        if not user_query:
-            return jsonify({'status': 'error', 'message': 'Missing user_query'}), 400
+        language = request.json.get('language')
+        if not user_query or not language:
+            return jsonify({'status': 'error', 'message': 'Missing required data'}), 400
         
         request_id = uuid.uuid4()
 
-        context = {'user_query': user_query, 'request_id': request_id}
+        context = {'user_query': user_query, 'request_id': request_id, 'language': language}
         logging.info(f"Received user query: {user_query}")
         crawl(context)
         create_steps_prompt(context)

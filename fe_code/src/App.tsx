@@ -3,11 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import "antd/dist/reset.css"; 
 
-import { Button, Input, Menu, Skeleton } from 'antd';
+import { Button, Dropdown, Input, Menu, Skeleton } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import {Layout} from 'antd'
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
+import Icon, { PlusOutlined } from '@ant-design/icons';
+import waveLogo from './wave.png'
 
 const siderStyle: React.CSSProperties = {
   overflow: 'auto',
@@ -34,14 +36,14 @@ const initialHistoryItems = [
   },
 ]
 
-const sendUserGoal = async (user_goal: string) => {
+const sendUserGoal = async (user_goal: string, language: string) => {
   try {
       const response = await fetch('http://localhost:5001', {
           method: 'POST',  // Use POST for sending data
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ user_goal }),  // Payload
+          body: JSON.stringify({ user_goal, language }),  // Payload
       });
 
       if (!response.ok) {
@@ -67,6 +69,8 @@ type PageState = {
 
 function App() {
   const [query, setQuery] = useState<string>()
+  const [language, setLanguage] = useState<string>('english')
+
   const [historyItems, setHistoryItems] = useState(initialHistoryItems)
   const [pageState, setPageState] = useState<PageState>()
 
@@ -78,7 +82,7 @@ function App() {
       inUse: true,
       loading: true,
     })
-    const response = await sendUserGoal(query)
+    const response = await sendUserGoal(query, language)
     setPageState({
       inUse: true,
       loading: false,
@@ -102,7 +106,7 @@ function App() {
               Demos
           </div>
           <div style={{paddingBottom: 20}}>
-            <Button onClick={handleNewDemo}>New Demo</Button>
+            <Button onClick={handleNewDemo} icon={<PlusOutlined />}>New Demo</Button>
           </div>
           <div style={{display: 'flex', flexDirection: 'column', gap: 16,}}>
             {historyItems.map((item, index) => 
@@ -151,13 +155,40 @@ function App() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
-                <Button 
-                  type="primary" 
-                  style={{width: 'fit-content', alignSelf: 'end'}} 
-                  onClick={handleGenerate}
-                >
-                  Generate
-                </Button>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between'
+                }}>
+                  <Dropdown menu={{ 
+                    onClick: (e) => setLanguage(e.key),
+                    selectedKeys: language ? [language] : undefined, 
+                    items: [
+                    {
+                      key: 'english',
+                      label: 'English'
+                    },
+                    {
+                      key: 'french',
+                      label: 'French'
+                    },
+                    {
+                      key: 'german',
+                      label: 'German'
+                    },
+                    {
+                      key: 'dutch',
+                      label: 'Dutch'
+                    }
+                  ] }} trigger={['click']}>
+                    <img src={waveLogo} alt="Icon" width={24} height={24} />
+                  </Dropdown>
+                  <Button 
+                    type="primary" 
+                    onClick={handleGenerate}
+                  >
+                    Generate
+                  </Button>
+                </div>
               </div>
             </Content>
           }
