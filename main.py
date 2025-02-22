@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import logging
 from generateDemoSteps import create_steps_prompt
+from audio import gen_audio, gen_transcript
 import uuid
 
 # setup logging
@@ -10,14 +11,6 @@ app = Flask(__name__)
 
 def gen_video(context):
     logging.info("Generating video")
-    pass
-
-def gen_transcript(context):
-    logging.info("Generating transcript")
-    pass
-
-def gen_audio(context):
-    logging.info("Generating audio")
     pass
 
 def overlay_audio_to_video(context):

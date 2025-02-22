@@ -2,3 +2,6 @@ myenv
 venv
 browser_use/**/*.pyc
 recordings
+crawler/crawler/__pycache__/
+*.pyc
+crawler/output.json
