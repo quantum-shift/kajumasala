@@ -3,6 +3,7 @@ from browser_use import Agent
 from browser_use import BrowserConfig, Browser, BrowserContextConfig
 import asyncio
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -24,14 +25,6 @@ steps = """1. Open elevenlabs.io website directly
 6. Select 'Agent Language' as 'Dutch' -> Input the 'System prompt' as something related to Negotiation coach.
 7. Finally click 'Test AI Agent' and end.
 """
-
-# user_goal = "Just do google search on Glean"
-
-# steps = """1. Open google.com website directly
-# 2. Search for 'Glean'
-# 3. Click 'First link'
-# 4. End the steps
-# """
 
 async def main():
     with open("demoAgent.prompt", "r") as file:
