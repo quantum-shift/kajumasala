@@ -1,0 +1,15 @@
+I start by searching for "elevenlabs.io" on Google. 
+
+Once the search results appear, I click on the suggestion that leads me to "elevenlabs.io/app/conversational-ai/agents." This takes me to a page where I can explore creating a conversational AI agent.
+
+Next, I find an option that says "Create this AI agent," and I click on it to begin the process of creating my conversational AI agent.
+
+On the following page, I choose the option "Start from blank" to initiate a new AI agent creation.
+
+Now, I switch to setting up my AI agent. I fill in the required details, including the agent's name, the first message it will send, and the system prompt that will guide its behavior.
+
+After completing the 'System Prompt,' I click on 'Save' to secure my setup.
+
+To finalize the creation, I make sure to save all of my settings. 
+
+Finally, I confirm that my AI agent has been successfully created.

@@ -1,0 +1,33 @@
+Here are the steps to create a conversational AI agent named "Eric the Support Agent" on the ElevenLabs platform:
+
+1. **Set Up Your Environment**: Ensure that you have access to a web browser and an internet connection.
+
+2. **Access ElevenLabs**:
+   - Open your web browser.
+   - Go to Google and search for "elevenlabs.io".
+
+3. **Navigate to the AI Agent Creation Page**:
+   - From the search results, find and click on the link that leads to "elevenlabs.io/app/conversational-ai/agents".
+
+4. **Start the Agent Creation Process**:
+   - On the Eleven Labs page, look for the option labeled "Create this AI agent" and click on it.
+
+5. **Handle Loading Issues**:
+   - If the "Create this AI agent" button does not work (due to it being in a loading state), wait for the page to refresh or load fully. 
+
+6. **Set Up Your AI Agent**:
+   - You will need to fill in the following details:
+     - **Agent Name**: Enter "Eric the Support Agent".
+     - **First Message**: Type "Hi, I'm Eric. How can I help you today?".
+     - **System Prompt**: Write the following description: "You are a support agent named Eric. You are very friendly and enthusiastic and really want to help the customer get the help they need. Answer in 3 to 7 sentences in most cases."
+
+7. **Save the Agent Information**:
+   - After filling in the details, look for the "Save" button on the page and click it to finalize the information.
+
+8. **Confirmation**:
+   - Once saved, you should see a confirmation message indicating that the conversational AI agent "Eric the Support Agent" has been successfully created.
+
+9. **Final Note**:
+   - Ensure that the agent is set up properly and can assist customers effectively with its initial greeting and system prompt.
+
+Congratulations! You have successfully created a conversational AI agent.

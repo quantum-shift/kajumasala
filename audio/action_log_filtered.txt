@@ -1,0 +1,8 @@
+Next goal: Search for elevenlabs.io on Google.
+Next goal: Click the suggestion for elevenlabs.io/app/conversational-ai/agents to explore creating a conversational AI agent.
+Next goal: Click on 'Create this AI agent' to initiate creating a conversational AI agent
+Next goal: Click 'Start from blank' to initiate a new AI agent creation.
+Next goal: Switch to setting up the AI agent by filling the required details like agent name, first message, and system prompt.
+Next goal: Complete filling the 'System Prompt' and save the setup by clicking 'Save'.
+Next goal: Finalize the creation of the AI agent by saving the settings.
+Next goal: Finalize the task by confirming the successful creation of the AI agent.

@@ -1,0 +1,57 @@
+### Présentation de la réunion sur les actions utilisateur pour créer un agent conversationnel IA
+
+#### Vue d'ensemble :
+Aujourd'hui, nous allons discuter de la série d'actions prises par l'utilisateur pour créer un agent conversationnel IA nommé "Eric l'Agent Support" en utilisant la plateforme ElevenLabs.
+
+#### Détail du journal des actions :
+
+1. **Initialisation** :
+   - La journalisation a été configurée pour l'utilisation du navigateur, et la télémétrie anonymisée a été activée pour suivre les progrès.
+
+2. **Étape 1 : Préparation de recherche** :
+   - L'utilisateur a initié la tâche en planifiant une visite sur **elevenlabs.io** afin de créer un agent conversationnel IA.
+   - Le terme de recherche **"elevenlabs.io"** a été correctement saisi dans le navigateur.
+
+3. **Étape 2 : Accès au site** :
+   - L'utilisateur a évalué les suggestions basées sur sa saisie et a pu cliquer sur la suggestion pertinente qui menait au site ElevenLabs.
+
+4. **Étape 3 : Navigation vers création d'agent IA** :
+   - L'utilisateur est arrivé avec succès à la page spécifiquement conçue pour créer des agents IA. Des options étaient disponibles pour commencer à créer ou essayer des agents IA.
+
+5. **Étape 4 : Première tentative de création** :
+   - L'utilisateur a tenté de créer un agent mais s'est heurté à un problème où le bouton "Créer cet agent IA" était dans un état chargement, empêchant toute action ultérieure.
+
+6. **Étape 5 : Nouvelle tentative de création** :
+   - Malgré les erreurs lors des clics précédents, l'utilisateur s'est concentré sur le paramétrage des attributs de l'agent. Il/Elle a réussi à entrer le nom de l'agent sous forme "**Eric l'Agent Support"**, puis préparait le premier message.
+
+7. **Étape 6 : Remplissage des détails d'agent** :
+   - L'utilisateur remplit les détails du premier message ainsi que ceux du prompt système, indiquant les attributs nécessaires à l’agent, montrant une bonne interaction avec la plateforme.
+
+8. **Étape 7 : Enregistrement du paramètre d’agent** :
+   - Tous les champs requis ont été remplis et l’utilisateur procède ensuite à sauvegarder la configuration complète de cet agent.
+
+9. **Dernière étape : Confirmation créative finale**
+   
+10: 
+    * La procédure complète se termine par confirmation avec succès via ce message confirmant bien sûr tout paramètre mis en place concernant “Eric Agent Support”, conçu justement afin qu'il assiste ses clients grâce aux réponses amicales et enthousiastes qu'il fournit.
+
+
+#### Résultat:
+- L’utilisateur navigue efficacement via interface ElevenLabs jusqu'à réussir finalement bien sûr cette création totale d'un bon Agent Conversationnel AI malgré quelques revers temporaires comme problème liés aux boutons bloqués pendant chargement ; mais globalement cette tâche s’est achevée avec succès.
+
+
+#### Conclusion:
+Le fait que cet effort soit pris initialement afin que nous puissions utiliser efficacement une technologie visant améliorer opération support client montre clairement comment elle peut être utilisée dans ce but ; donc nos discussions futures peuvent alors porter principalement autour mise œuvre feedbacks & renforcement capacités maximales performantes possibles chez cet Agent Conversationel AI
+
+Citations:
+[1] https://www.taskade.com/agents/translator/french-translator
+[2] https://www.uptech.team/blog/how-to-build-conversational-ai
+[3] https://support.zendesk.com/hc/fr/articles/4408842754202-Gestion-des-langues-dans-un-bot-de-conversation
+[4] https://amelia.ai
+[5] https://www.salesforce.com/fr/agentforce/ai-agent-vs-chatbot/
+[6] https://smythos.com/ai-agents/conversational-agents/conversational-agent-architecture/
+[7] https://www.futura-sciences.com/tech/actualites/intelligence-artificielle-adoptez-chat-agent-conversationnel-francais-veut-renverser-chatgpt-111761/
+[8] https://opendialog.ai
+
+---
+Answer from Perplexity: pplx.ai/share
