@@ -12,6 +12,7 @@ import pyautogui
 # import pyscreenrec
 from time import time
 import threading
+import traceback
 
 load_dotenv()
 
@@ -157,10 +158,11 @@ async def generateDemoVideo(context):
     context['action_logs'] = result
     return context
 
-asyncio.run(generateDemoVideo({
-    'request_id': '123',
-    'start_url': 'https://elevenlabs.io/app',
-    'user_goal': 'create a negotiation coach conversational agent',
-    'demo_steps': """- Click 'Conversational AI' under products section in LHS
-"""
-}))
+if __name__ == "__main__":
+    asyncio.run(generateDemoVideo({
+        'request_id': '123',
+        'start_url': 'https://elevenlabs.io/app',
+        'user_goal': 'create a negotiation coach conversational agent',
+        'demo_steps': """- Click 'Conversational AI' under products section in LHS
+    """
+    }))
