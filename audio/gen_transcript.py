@@ -22,5 +22,8 @@ completion = client.chat.completions.create(
     store=True
 )
 
-print(completion.choices[0].message.content)
+# print(completion.choices[0].message.content)
+
+with open("./audio/transcript.txt", "w") as file:
+    file.write(completion.choices[0].message.content)
 
