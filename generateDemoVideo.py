@@ -128,6 +128,7 @@ async def generateDemoVideo(context):
             'width': 1600,
             'height': 1200
         },
+        maximum_wait_page_load_time=2,
         #cookies_file='11labs_cookies.json'
     )
     async with await browser.new_context(config=contextConfig) as browser_context:
@@ -137,6 +138,7 @@ async def generateDemoVideo(context):
             use_vision=True,
             use_vision_for_planner=True,
             browser_context=browser_context,
+            planner_interval=1000,
             initial_actions=[
                 {'open_tab': {'url': start_url}}
             ]
