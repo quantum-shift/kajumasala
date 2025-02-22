@@ -18,9 +18,11 @@ def gen_audio():
 def overlay_audio_to_video():
     pass
 
-@app.route('/run', methods=['GET'])
+
+# Get a user query as input from request body
+@app.route('/generate', methods=['POST'])
 def run():
-    # Sequentially call all functions, piping outputs
+    request_data = request.get_json()
     create_steps_prompt_data = create_steps_prompt()
     er_gen_video_data = gen_video()
     gen_transcript_data = gen_transcript()
