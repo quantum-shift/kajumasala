@@ -30,7 +30,7 @@ def run():
 
         context = {'user_query': user_query, 'request_id': request_id, 'language': language}
         logging.info(f"Received user query: {user_query}")
-        crawl(context)
+        # crawl(context)
         create_steps_prompt(context)
         context['start_url'] = 'https://elevenlabs.io/app/home'
         asyncio.run(gen_video(context))
