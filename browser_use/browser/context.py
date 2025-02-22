@@ -316,15 +316,7 @@ class BrowserContext:
 		elif self.browser.config.chrome_instance_path and len(browser.contexts) > 0:
 			print("In second condition")
 			# Connect to existing Chrome instance instead of creating new one
-			existing_context = browser.contexts[0]
-			context = await browser.new_context(
-				viewport=self.config.browser_window_size,
-				no_viewport=False,
-				java_script_enabled=True,
-				record_video_dir=self.config.save_recording_path,
-			)
-			context.add_cookies(existing_context.cookies())
-
+			context = browser.contexts[0]
 		else:
 			# Original code for creating new context
 			print("Save recording path:", self.config.save_recording_path)
@@ -339,7 +331,6 @@ class BrowserContext:
 				record_video_size=self.config.browser_window_size,
 				locale=self.config.locale,
 			)
-			print('all_cookies', context.cookies)
 
 		if self.config.trace_path:
 			await context.tracing.start(screenshots=True, snapshots=True, sources=True)
