@@ -29,3 +29,4 @@ langchain-google-genai==2.0.8
 moviepy>=2.1.2
 openai
 elevenlabs
+flask
