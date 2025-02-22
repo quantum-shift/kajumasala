@@ -1,0 +1,13 @@
+On February 22, 2025, at 10:00 AM, the user began a session to create a conversational AI agent named "Eric the Support Agent" on the Eleven Labs website.
+
+Firstly, the user set up the browsing tool and enabled data collection while proceeding to search for **elevenlabs.io** on Google. Once the browser was ready, they entered "elevenlabs.io" into the search bar and were able to see suggestions for the site.
+
+Next, the user clicked on the relevant suggestion which led them to the Eleven Labs page that had options for creating or trying out AI agents. After successfully navigating to the site, the user attempted to click on the option to "Create this AI agent." However, they encountered a loading issue that required them to refresh the options.
+
+Despite this setback, the user proceeded to a different approach by trying to initiate the creation of a new agent. They started by filling in the agent’s name, entered **"Eric the Support Agent,"** and added an initial greeting: **"Hi, I'm Eric. How can I help you today?"** Following this, the user also crafted a system prompt outlining Eric's supportive character traits.
+
+Upon entering these details, the user encountered a situation where the intended "Create this AI agent" button was not clickable, likely due to a change on the page. This resulted in a brief pause in progress as the user adjusted their approach.
+
+Eventually, they continued with filling in the necessary fields, making sure to detail Eric's personality further and setting up the agent's system prompt. After completing these sections, the user clicked "Save" to finalize the AI agent's configurations.
+
+With everything filled out and the settings saved successfully, the user confirmed the creation of **"Eric the Support Agent,"** marking the completion of their task. They were satisfied to have set up an AI agent equipped with an initial greeting and system prompt designed to assist customers effectively.

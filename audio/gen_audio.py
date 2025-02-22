@@ -20,7 +20,7 @@ def gen_audio(text, language, voice_id, voice_settings):
 
 if __name__ == "__main__":
     text = ""
-    with open("./audio/transcript.txt", "r") as file:
+    with open("./audio/transcript/transcript.txt", "r") as file:
         text = file.read()
     language = "en"
     voice_id = "JBFqnCBsd6RMkjVDRZzb"
