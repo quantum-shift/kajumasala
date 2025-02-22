@@ -8,3 +8,8 @@ crawler/output.json
 # Ignore Python bytecode files
 __pycache__/
 *.pyc
+*.json
+*.avi
+audio/audio_*.mp3
+output/
+*.mp4
