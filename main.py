@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import logging
 from generateDemoSteps import create_steps_prompt
 from audio import gen_audio, gen_transcript, crawl
@@ -8,11 +8,13 @@ from overlay.merge_av import merge_video_audio
 import uuid
 import traceback
 import asyncio
+from flask_cors import CORS
 
 # setup logging
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+CORS(app)
 
 # def gen_video(context):
 #     logging.info("Generating video")
@@ -47,6 +49,13 @@ def run():
     except Exception as e:
         logging.error(f"Error processing request: {str(e), traceback.format_exc()}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
+    
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
