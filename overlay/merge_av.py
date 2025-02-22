@@ -1,6 +1,6 @@
 # merge_media.py
 
-from moviepy.editor import VideoFileClip, AudioFileClip
+from moviepy import VideoFileClip, AudioFileClip
 
 def merge_video_audio(context):
     """
