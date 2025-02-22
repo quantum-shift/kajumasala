@@ -26,3 +26,4 @@ langchain-aws>=0.2.11
 langchain-fireworks>=0.2.6
 langchain-google-genai==2.0.8
 openai
+elevenlabs
