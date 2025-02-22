@@ -1,6 +1,10 @@
 import scrapy
 import json
-from scrapy.crawler import CrawlerProcess
+
+from twisted.internet import reactor
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.project import get_project_settings
+from twisted.internet.defer import Deferred
 
 class MySpider(scrapy.Spider):
     name = "my_spider"
@@ -20,6 +24,9 @@ class MySpider(scrapy.Spider):
     }
 
     def parse(self, response):
+        with open("./audio/product_crawl_data.json", "w") as file:
+            file.truncate(0)
+
         # Extract clean text content from specific tags like <p>, <h1>, <h2>, etc.
         page_text = response.css('p::text').getall()  # Extract text from all <p> tags
         page_headings = response.css('h1::text, h2::text, h3::text').getall()  # Extract text from headings
@@ -72,14 +79,28 @@ class MySpider(scrapy.Spider):
 
 
 def crawl(context):
-    # run scrapy crawl my_spider
-    process = CrawlerProcess()
-    process.crawl(MySpider)
-    process.start()
-    process.join()
-    with open("./audio/product_crawl_data.json", "r") as file:
-        content = file.read()
-        context['crawl_data'] = content
+    settings = get_project_settings()
+    runner = CrawlerRunner(settings)
+    deferred = runner.crawl(MySpider)
+
+    def store_results(null):
+        with open("./audio/product_crawl_data.json", "r") as file:
+            content = file.read()
+            context['crawl_data'] = content
+        reactor.stop()
+
+    deferred.addCallback(store_results)
+    # deferred.addBoth(store_results)
+    reactor.run()
+
+
+    # process = CrawlerProcess()
+    # process.crawl(MySpider)
+    # process.start()
+    # process.join()
+    # with open("./audio/product_crawl_data.json", "r") as file:
+    #     content = file.read()
+    #     context['crawl_data'] = content
 
 if __name__ == "__main__":
     context = {}

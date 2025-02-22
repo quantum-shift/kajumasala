@@ -18,11 +18,15 @@ steps = """1. Open elevenlabs.io website directly
 7. Finally click 'Test AI Agent' and end.
 """
 
+steps2 = """1. Open elevenlabs.io website directly
+2. Click 'Go to app'
+"""
+
 def create_steps_prompt(context: dict) -> str:
     if not context.get('user_query'):
         raise RuntimeError("Missing user_query in generateDemoSteps.create_steps_prompt")
     
     context['user_goal'] = context.get('user_query')
-    context['demo_steps'] = steps
+    context['demo_steps'] = steps2
     
     # raise RuntimeError("Error path in generateDemoSteps.create_steps_prompt")

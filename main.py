@@ -31,7 +31,7 @@ def run():
         logging.info(f"Received user query: {user_query}")
         crawl(context)
         create_steps_prompt(context)
-        context['start_url'] = 'https://elevenlabs.io/app'
+        context['start_url'] = 'https://elevenlabs.io/app/home'
         asyncio.run(gen_video(context))
         process_logs(context)
         gen_transcript(context)
