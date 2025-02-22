@@ -20,6 +20,9 @@ class MySpider(scrapy.Spider):
     }
 
     def parse(self, response):
+        with open("./audio/product_crawl_data.json", "w") as file:
+            file.truncate(0)
+
         # Extract clean text content from specific tags like <p>, <h1>, <h2>, etc.
         page_text = response.css('p::text').getall()  # Extract text from all <p> tags
         page_headings = response.css('h1::text, h2::text, h3::text').getall()  # Extract text from headings
