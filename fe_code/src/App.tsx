@@ -218,8 +218,8 @@ function App() {
                   </div>
                 }
               ]} />
-              {pageState.pageUrl && 
-                <div style={{display: 'flex', flexDirection: 'column', gap: 16}}>
+              {pageState.pageUrl &&
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{
                     fontSize: '1.25rem',
                     fontWeight: 500,
@@ -227,7 +227,7 @@ function App() {
                   }}>
                     Check demo <a href={`file://${pageState.pageUrl}`} target="_blank" rel="noreferrer">here</a>🎉
                   </div>
-                  <div style={{display: 'flex', flexDirection: 'row', gap: 8, paddingLeft: 20}}>
+                  <div style={{ display: 'flex', flexDirection: 'row', gap: 8, paddingLeft: 20 }}>
                     <img src={thumbsUpLogo} alt="Icon" width={16} height={16} />
                     <img src={thumbsDownLogo} alt="Icon" width={16} height={16} />
                     <Dropdown menu={{
