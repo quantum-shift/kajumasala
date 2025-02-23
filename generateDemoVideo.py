@@ -123,7 +123,7 @@ async def generateDemoVideo(context):
             'height': 1200
         },
         maximum_wait_page_load_time=2,
-        highlight_elements=False
+        # highlight_elements=False
         #cookies_file='11labs_cookies.json'
     )
     action_list = []
