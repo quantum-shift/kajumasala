@@ -3,12 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import "antd/dist/reset.css";
 
-import { Button, Dropdown, Input, Menu, Skeleton } from 'antd';
+import { Button, Dropdown, Input, Menu, Skeleton, Spin } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { Layout } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
-import Icon, { PlusOutlined } from '@ant-design/icons';
+import Icon, { CheckOutlined, PlusOutlined } from '@ant-design/icons';
 import waveLogo from './wave.png'
 import shareLogo from './share.svg'
 import thumbsUpLogo from './thumbsUp.svg'
@@ -200,24 +200,36 @@ function App() {
           Sales Demo Agent
         </Header>
         {
-          pageState.inUse ? <Content style={{ padding: '30px 50px' }}>
+          pageState.inUse ? <Content style={{ padding: '30px 180px', maxWidth: '100%', width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{
                 fontSize: '1.25rem',
                 fontWeight: 500,
-                padding: 20
+                paddingTop: 20,
+                paddingBottom: 20,
               }}>
                 {pageState.query}
               </div>
-              <Collapse defaultActiveKey={['1']} ghost items={[
-                {
-                  key: '1',
-                  label: 'Generating demo...',
-                  children: <div style={{ color: '#727272', display: 'flex', flexDirection: 'column' }}>
-                    {pageState.progressMessages?.map((message) => <div>{message}</div>)}
+              <div style={{
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                padding: '12px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
+                width: '100%'
+              }}>
+                {pageState.progressMessages?.map((message, index) => (
+                  <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {index === (pageState.progressMessages?.length || 0) - 1 && pageState.loading ? (
+                      <Spin size="small" />
+                    ) : (
+                      <CheckOutlined style={{ color: 'green' }} />
+                    )}
+                    {message}
                   </div>
-                }
-              ]} />
+                ))}
+              </div>
               {pageState.pageUrl &&
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{
@@ -227,7 +239,7 @@ function App() {
                   }}>
                     Check demo <a href={`${pageState.pageUrl}`} target="_blank" rel="noreferrer">here</a>🎉
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', gap: 8, paddingLeft: 20 }}>
+                  <div style={{ display: 'flex', flexDirection: 'row', gap: 10, paddingLeft: 20 }}>
                     <img src={thumbsUpLogo} alt="Icon" width={16} height={16} />
                     <img src={thumbsDownLogo} alt="Icon" width={16} height={16} />
                     <Dropdown menu={{
