@@ -40,6 +40,5 @@ def merge_video_audio(context):
     # Write the final video with the new audio
     video.write_videofile(final_video_path, codec="libx264", audio_codec="aac")
 
-    realpath_video_path = os.path.realpath(final_video_path)
-
-    context['final_video_path'] = realpath_video_path
+    served_video_path = f"http://127.0.0.1:8080/output_video_{context.get('request_id')}.mp4"
+    context['final_video_path'] = served_video_path

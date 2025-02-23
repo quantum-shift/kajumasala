@@ -225,7 +225,7 @@ function App() {
                     fontWeight: 500,
                     paddingLeft: 20
                   }}>
-                    Check demo <a href={`file://${pageState.pageUrl}`} target="_blank" rel="noreferrer">here</a>🎉
+                    Check demo <a href={`${pageState.pageUrl}`} target="_blank" rel="noreferrer">here</a>🎉
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'row', gap: 8, paddingLeft: 20 }}>
                     <img src={thumbsUpLogo} alt="Icon" width={16} height={16} />
