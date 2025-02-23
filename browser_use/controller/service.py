@@ -61,7 +61,10 @@ class Controller(Generic[Context]):
 		async def search_google(params: SearchGoogleAction, browser: BrowserContext):
 			page = await browser.get_current_page()
 			await page.goto(f'https://www.google.com/search?q={params.query}&udm=14')
-			await page.wait_for_load_state()
+			try:
+				await page.wait_for_load_state(timeout=5000)
+			except Exception as e:
+				print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 			msg = f'🔍  Searched for "{params.query}" in Google'
 			logger.info(msg)
 			return ActionResult(extracted_content=msg, include_in_memory=True)
@@ -70,7 +73,10 @@ class Controller(Generic[Context]):
 		async def go_to_url(params: GoToUrlAction, browser: BrowserContext):
 			page = await browser.get_current_page()
 			await page.goto(params.url)
-			await page.wait_for_load_state()
+			try:
+				await page.wait_for_load_state(timeout=5000)
+			except Exception as e:
+				print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 			msg = f'🔗  Navigated to {params.url}'
 			logger.info(msg)
 			return ActionResult(extracted_content=msg, include_in_memory=True)
@@ -144,7 +150,10 @@ class Controller(Generic[Context]):
 			await browser.switch_to_tab(params.page_id)
 			# Wait for tab to be ready
 			page = await browser.get_current_page()
-			await page.wait_for_load_state()
+			try:
+				await page.wait_for_load_state(timeout=5000)
+			except Exception as e:
+				print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 			msg = f'🔄  Switched to tab {params.page_id}'
 			logger.info(msg)
 			return ActionResult(extracted_content=msg, include_in_memory=True)

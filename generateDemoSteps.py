@@ -15,7 +15,7 @@ steps = """1. Open elevenlabs.io website directly
 4. On the LHS choose 'Agents' -> Click 'Create an Ai Agent' -> 'Blank template'
 5. Provide name as 'Sales Negotiation Coach' -> 'Create Agent' 
 6. Select 'Agent Language' as 'Dutch' -> Input the 'System prompt' as something related to Negotiation coach.
-7. Finally click 'Test AI Agent' and end.
+7. Finally click 'Test AI Agent Button' and end.
 """
 
 steps2 = """1. Open elevenlabs.io website directly

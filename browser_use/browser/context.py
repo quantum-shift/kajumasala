@@ -281,7 +281,10 @@ class BrowserContext:
 
 		# Bring page to front
 		await active_page.bring_to_front()
-		await active_page.wait_for_load_state('load')
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 
 		return self.session
 
@@ -289,7 +292,10 @@ class BrowserContext:
 		async def on_page(page: Page):
 			if self.browser.config.cdp_url:
 				await page.reload()  # Reload the page to avoid timeout errors
-			await page.wait_for_load_state()
+			try:
+				await page.wait_for_load_state(timeout=5000)
+			except Exception as e:
+				print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 			logger.debug(f'New page opened: {page.url}')
 			if self.session is not None:
 				self.state.target_id = None
@@ -317,6 +323,7 @@ class BrowserContext:
 			print("In second condition")
 			# Connect to existing Chrome instance instead of creating new one
 			context = browser.contexts[0]
+			context.set_default_navigation_timeout(5000)
 		else:
 			# Original code for creating new context
 			print("Save recording path:", self.config.save_recording_path)
@@ -622,14 +629,23 @@ class BrowserContext:
 			raise BrowserError(f'Navigation to non-allowed URL: {url}')
 
 		page = await self.get_current_page()
-		await page.goto(url)
-		await page.wait_for_load_state()
+		try:
+			await page.goto(url, timeout=5000)
+		except Exception as e:
+			print(f'Failed to goto page: {str(e)}, continuing anyway')
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 
 	async def refresh_page(self):
 		"""Refresh the current page"""
 		page = await self.get_current_page()
 		await page.reload()
-		await page.wait_for_load_state()
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 
 	async def go_back(self):
 		"""Navigate back in history"""
@@ -676,7 +692,12 @@ class BrowserContext:
 	@time_execution_sync('--get_state')  # This decorator might need to be updated to handle async
 	async def get_state(self) -> BrowserState:
 		"""Get the current state of the browser"""
-		await self._wait_for_page_and_frames_load()
+		try:
+			await asyncio.wait_for(self._wait_for_page_and_frames_load(), timeout=10)  
+		except asyncio.TimeoutError:
+			print("Timeout reached: continuing to next steps")
+			pass  # Timeout reached, continue without waiting further
+	
 		session = await self.get_session()
 		session.cached_state = await self._update_state()
 
@@ -1070,12 +1091,18 @@ class BrowserContext:
 					except TimeoutError:
 						# If no download is triggered, treat as normal click
 						logger.debug('No download triggered within timeout. Checking navigation...')
-						await page.wait_for_load_state()
+						try:
+							await page.wait_for_load_state(timeout=5000)
+						except Exception as e:
+							print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 						await self._check_and_handle_navigation(page)
 				else:
 					# Standard click logic if no download is expected
 					await click_func()
-					await page.wait_for_load_state()
+					try:
+						await page.wait_for_load_state(timeout=5000)
+					except Exception as e:
+						print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 					await self._check_and_handle_navigation(page)
 
 			try:
@@ -1131,7 +1158,10 @@ class BrowserContext:
 					break
 
 		await page.bring_to_front()
-		await page.wait_for_load_state()
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 
 	@time_execution_async('--create_new_tab')
 	async def create_new_tab(self, url: str | None = None) -> None:
@@ -1141,10 +1171,16 @@ class BrowserContext:
 
 		session = await self.get_session()
 		new_page = await session.context.new_page()
-		await new_page.wait_for_load_state()
+		try:
+			await page.wait_for_load_state(timeout=5000)
+		except Exception as e:
+			print(f'Failed to wait for load state: {str(e)}, continuing anyway')
 
 		if url:
-			await new_page.goto(url)
+			try:
+				await new_page.goto(url)
+			except Exception as e:
+				print(f'Failed to goto page: {str(e)}, continuing anyway')
 			await self._wait_for_page_and_frames_load(timeout_overwrite=1)
 
 		# Get target ID for new page if using CDP
